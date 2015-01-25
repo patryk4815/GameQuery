@@ -1,8 +1,7 @@
 License
 =======
 
-* GameQuery is licensed under `Creative Commons Attribution-NonCommercial 3.0 <http://creativecommons.org/licenses/by-nc/3.0/>`_ license.
-
+* GameQuery is licensed under [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/) license.
 
 Requirements
 ============
