@@ -286,7 +286,7 @@ server_data = {
         {'hostname': 'LoS-Gaming :: 24/7 Cabin :: LoS-Clan.net ', 'map': 'zpo_cabin_outbreak_b6', 'is_password': False, 'players': 16, 'maxplayers': 24},
     ),
 
-    #this game are not in gametracker.com
+    # this game are not in gametracker.com
     'Blade Symphony': (
         'valve',
         b'\xff\xff\xff\xffI\x11Server name\x00duel_district\x00berimbau\x00Blade Symphony\x00\x00\x00\x00\n\x00dl\x00\x010.01.02777\x00\xb1\x90i\t`\x9f\x0fl\x11@\x01mode:Blade Symphony,empty,gamemode:Duel,ranked:yes,sv_search_key_1000,\x00@q\x03\x00\x00\x00\x00\x00',
@@ -338,7 +338,7 @@ class TestQuery(TestCase):
 
         self.q = query.Query()
 
-        #init server fork
+        # init server fork
         self.thread = ServerQuery(self.port)
         self.thread.start()
 
@@ -358,7 +358,7 @@ class TestQuery(TestCase):
                 send_to_socket(key)
 
                 response_socket = self.q.query('127.0.0.1', self.port, typ)
-                # with self.subTest(game=key):
-                self.assertEqual(response_data, response_socket)
+                with self.subTest(game=key):
+                    self.assertEqual(response_data, response_socket)
         finally:
             send_to_socket('stop')
