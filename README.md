@@ -1,2 +1,17 @@
-# GameQuery
-Query for gamespy1, gamespy2, gamespy3, gamespy4, valve, quake3
+License
+=======
+
+* GameQuery is licensed under `Creative Commons Attribution-NonCommercial 3.0 <http://creativecommons.org/licenses/by-nc/3.0/>`_ license.
+
+
+Requirements
+============
+
+* Python 3.4 or better (or maybe python 3.3 [not tested])
+
+TODO
+====
+
+* add asyncio module
+* add players list
+* add rules list
