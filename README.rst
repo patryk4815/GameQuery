@@ -12,13 +12,12 @@ Usage
 =====
 
 .. code-block:: python
+
     >>> import query
     >>> 
     >>> info = query.Query()
     >>> info.query('127.0.0.1', 27015, 'gamespy1')
-    {'hostname': ' --=[ aX ]=-- (CD and Origin)', 'map': 'iwo jima', 'is_password': False, 'maxplayers': 64, 'players': 42},
-    
-
+    {'hostname': ' --=[ aX ]=-- (CD and Origin)', 'map': 'iwo jima', 'is_password': False, 'maxplayers': 64, 'players': 42}
 
 
 TODO
