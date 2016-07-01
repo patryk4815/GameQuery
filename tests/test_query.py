@@ -1,3 +1,5 @@
+raise NotImplementedError('need to rewrite')
+
 from unittest import TestCase
 from threading import Thread
 import socket

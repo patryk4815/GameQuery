@@ -1,4 +1,5 @@
 import asyncio
+from ..errors import TimeoutError
 
 __all__ = [
     'Timeout',
@@ -31,7 +32,7 @@ class Timeout:
         if exc_type is asyncio.CancelledError and self._cancelled:
             self._cancel_handler = None
             self._task = None
-            raise asyncio.TimeoutError
+            raise TimeoutError
         self._cancel_handler.cancel()
         self._cancel_handler = None
         self._task = None

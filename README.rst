@@ -1,7 +1,7 @@
 License
 =======
 
-* GameQuery is licensed under `Creative Commons Attribution-NonCommercial 3.0 <http://creativecommons.org/licenses/by-nc/3.0/>`__ license.
+* GameQuery is licensed under MIT license.
 
 Requirements
 ============
@@ -13,19 +13,38 @@ Usage
 
 .. code-block:: python
 
-    >>> import query
-    >>> 
-    >>> info = query.Query()
-    >>> info.query('127.0.0.1', 27015, 'gamespy1')
-    {'hostname': ' --=[ aX ]=-- (CD and Origin)', 'map': 'iwo jima', 'is_password': False, 'maxplayers': 64, 'players': 42}
+    >>> import asyncio
+    >>> from query import *
+    >>>
+    >>> async def fetch_data(class_, ip, port, timeout):
+    >>>     async with class_(ip=ip, port=port, timeout=timeout) as s:
+    >>>         info = await s.get_info()
+    >>>         print('get_info', info)
+    >>>
+    >>>         players = await s.get_players()
+    >>>         print('get_players', players)
+    >>>
+    >>>         rules = await s.get_rules()
+    >>>         print('get_rules', rules)
+    >>>
+    >>>
+    >>> servers = [
+    >>>     # Class, IP, Port, Timeout
+    >>>     (GoldSource, '127.0.0.1', 27027, 5),
+    >>>     (Source, '127.0.0.1', 27050, 5),
+    >>> ]
+    >>>
+    >>> list_tasks = list()
+    >>> for args in servers:
+    >>>     list_tasks.append(fetch_data(*args))
+    >>>
+    >>> asyncio.get_event_loop().run_until_complete(asyncio.wait(list_tasks))
 
 
 TODO
 ====
 
-* add asyncio module
-* add players list
-* add rules list
+* write Tests
 * add install from pip
 * adds more docs and samples
 

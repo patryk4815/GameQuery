@@ -114,7 +114,7 @@ class QueryBytes(object):
 
     @property
     def cursor(self):
-        return bytes(self._cursor)
+        return self._cursor
 
     @cursor.setter
     def cursor(self, index):
