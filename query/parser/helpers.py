@@ -177,6 +177,8 @@ class QueryBytes(object):
         return self._set(data, c_type, size=None, offset=offset)
 
     def append(self, data, c_type):
-        if c_type is not None:
+        if c_type is None:
+            assert isinstance(data, bytes)
+        else:
             data, size = self._pack_data(data, c_type)
         self._buffer.extend(data)

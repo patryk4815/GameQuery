@@ -1,35 +1,26 @@
-from query.protocols import _Base
+from ..connection import BaseUDP
+from ..helpers import async_raise_on_timeout
+from ..parser.helpers import QueryBytes
 
-__author__ = 'Patryk'
 
-class Quake3(_Base):
-    def __init__(self, ip, port, timeout=1):
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-                s.settimeout(timeout)
-                s.connect((ip, port))
-                s.send(b'\xFF\xFF\xFF\xFFgetstatus\x0A')
-                response = s.recv(1600)
+class Quake3(BaseUDP):
+    @async_raise_on_timeout
+    async def get_info(self):
+        reader, writer = await self._connection.connect()
 
-                if self.debug:
-                    print(response)
-        except:
-            return None
+        query = QueryBytes()
+        query.append(b'\xFF\xFF\xFF\xFFgetstatus\x0A', None)
 
-        if response[4:19] != b'statusResponse\x0A':
-            return None
+        writer.write(query.buffer)
 
-        list_respond = response[20:].split(b'\x0A')
-        list_commands = list_respond[0].split(b'\\')
-        list_players = list_respond[1:-1]
+        return self.parse_info(QueryBytes(await reader.readline()))
 
-        keys = self.__bytelist_to_strlist(list_commands[::2])
-        values = list_commands[1::2]
-        response = dict(zip(keys, values))
+    def parse_info(self, response):
+        #  b'\xff\xff\xff\xffstatusResponse\n\\type\\-
 
-        response['q_players'] = len(list_players)
+        list_info = list()
 
-        if self.debug:
-            print(response)
+        list_split = response.buffer[20:].split(b'\\')
+        list_info = list(zip(list_split[::2], list_split[1::2]))
 
-        return self.__validate_data(response)
+        return list_info
