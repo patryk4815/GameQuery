@@ -1,12 +1,12 @@
-from unittest import TestCase
-import query
+raise NotImplementedError('need to rewrite')
 
+from unittest import TestCase
 from threading import Thread
 import socket
 
 server_data = {
     '7 Days to Die': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11[ff8000]8.6 Hunting Zone\x00Navezgane\x007DTD\x00\x00\x00\x00\x08\x18\x00dw\x00\x00Alpha 8.6\x00\xb1\xa8a\x074w\xfb3\x11@\x01ZombiesRun:0;Port:25000;IsDedicated:True;Version:Alpha 8.6;PlayerDamageGiven:0;BuildCreate:False;GameType:7DTD;CurrentPlayers:0\x00\xb2\xd6\x03\x00\x00\x00\x00\x00',
         {'hostname': '[ff8000]8.6 Hunting Zone', 'map': 'Navezgane', 'is_password': False, 'maxplayers': 24, 'players': 8},
     ),
@@ -21,17 +21,17 @@ server_data = {
         {'hostname': 'Another GameServers.com Hosted Server', 'map': 'Unknown', 'is_password': False, 'maxplayers': 10, 'players': 0},
     ),
     'Alien Swarm': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11"[U.S.S.[Sulaco] AvP server | www.usssulaco.ru"\x00Pyramid\x00avp3\x00Aliens vs Predator\x00\xb8)\x07\x0c\x00dw\x00\x011.0.0.0\x00\xb1\x96i\x08$gm%\x11@\x01_3_687472640_0_12_1_0_1735255732_1_____________________________14000000c8000000000000000000000000000000e1d19f440000000000000000\x00\xb8)\x00\x00\x00\x00\x00\x00',
         {'hostname': '"[U.S.S.[Sulaco] AvP server | www.usssulaco.ru"', 'map': 'Pyramid', 'is_password': False, 'maxplayers': 12, 'players': 7},
     ),
     "America's Army 3": (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11[Honor Server] -=312th=- Dallas I\x00Alley\x00aa3game\x00America\'s Army 3.3\x00T3\x1c\x1a\x00dw\x00\x001.0.0.0\x00\xb1I"\x00\x94\x8c\xe23\x11@\x01M=vip;W=cloudy;T=day;P=0;C=0;pb=1;voip=1;ver=AA3.3.1;\x00T3\x00\x00\x00\x00\x00\x00',
         {'hostname': '[Honor Server] -=312th=- Dallas I', 'map': 'Alley', 'is_password': False, 'maxplayers': 26, 'players': 28},
     ),
     "America's Army: Proving Grounds": (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11-=312th=- / Dallas I\x00FLO_ThreeKings_AC\x00aa4game\x00America\'s Army: Proving Grounds\x00\x00\x00\x0c\x18\x00dw\x00\x001.0.0.0\x00\xb1I"\x00\xb8\x02\xd65\x11@\x01M=;ver=124855;T=Waiting For Players;VM=0;P=0;C=1;pb=1;voip=1;sm=396;HONOR=1;\x00\x1a\x1a\x03\x00\x00\x00\x00\x00',
         {'hostname': '-=312th=- / Dallas I', 'map': 'FLO_ThreeKings_AC', 'is_password': False, 'maxplayers': 24, 'players': 12},
     ),
@@ -66,52 +66,52 @@ server_data = {
         {'hostname': '^1=[^3JFF^1]= ^3Cracked ^1Server ^3#1', 'map': 'mp_stalingrad', 'is_password': False, 'maxplayers': 40, 'players': 16},
     ),
     'Call of Duty: Modern Warfare 3': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11!   !   !   !^3WWW.^2MB2.^3CZ\x00Mission\x00modernwarfare3\x00MW3 Game Description\x00\xc2\xa6\x00\x12\x00dw\x00\x011.0.0.1\x00\xb1\x82u\x02\xd0\xd9@ \x11@\x01gn\\IW5\\gt\\war\\hc\\0\\pu\\0\\m\\mp_bravo\\px\\\\pn\\\\mr\\\\pc\\0\\ff\\0\\fg\\\\md\\\\kc\\1\\ac\\1\\d\\2\\qp\\30081\\vo\\1\\\x00\xc2\xa6\x00\x00\x00\x00\x00\x00',
         {'hostname': '!   !   !   !^3WWW.^2MB2.^3CZ', 'map': 'Mission', 'is_password': False, 'maxplayers': 18, 'players': 0},
     ),
     'Centration': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11Official Contagion - NY Server CE_BarloweSquare #1\x00ce_barlowesquare\x00contagion\x00Contagion\x00\x00\x00\x08\x08\x00dw\x00\x012.0.9.4\x00\xb1\x87i\x04\x84O?0\x11@\x01secure\x00^\xa3\x03\x00\x00\x00\x00\x00',
         {'hostname': 'Official Contagion - NY Server CE_BarloweSquare #1', 'map': 'ce_barlowesquare', 'is_password': False, 'maxplayers': 8, 'players': 8},
     ),
     'Counter-Strike 1.6': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffm127.0.0.1:27015\x00ZmOldSchool.CsBlackDevil.Com [Zombie Plauge]\x00zm_2day\x00cstrike\x00Counter-Strike\x00  /dl\x00\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00',
         {'hostname': 'ZmOldSchool.CsBlackDevil.Com [Zombie Plauge]', 'map': 'zm_2day', 'is_password': False, 'maxplayers': 32, 'players': 32},
     ),
     'Counter-Strike Global Offensive': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11OG:\\\\ NewbSurf #3 [Tier 1-2] OpiumGaming.com\x00surf_mesa\x00csgo\x00Counter-Strike: Global Offensive\x00\xda\x02((\x00dl\x00\x011.33.4.0\x00\xa1\x87iOpiumGaming.com,bhop,chicago,fastdl,og,rank,record,respawn,skill,surf,timer,secure\x00\xda\x02\x00\x00\x00\x00\x00\x00',
         {'hostname': 'OG:\\\\ NewbSurf #3 [Tier 1-2] OpiumGaming.com', 'map': 'surf_mesa', 'is_password': False, 'maxplayers': 40, 'players': 40},
     ),
     'Counter-Strike: Condition Zero': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffm127.0.0.1:27018\x00UGC | Dust2 #1 24/7 | UGC-Gaming.net\x00de_dust2_cz\x00czero\x00<------------------------------\x00\x19 /dl\x00\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00',
         {'hostname': 'UGC | Dust2 #1 24/7 | UGC-Gaming.net', 'map': 'de_dust2_cz', 'is_password': False, 'maxplayers': 32, 'players': 25},
     ),
     'Counter-Strike: Source': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11[GFLClan.com]24/7 ZOMBIE ESCAPE |Rank|NoBlock|FastDL|Chicago\x00ze_death_star_escape_v4_3\x00cstrike\x00Counter-Strike: Source\x00\xf0\x00?@\x00dl\x00\x012230303\x00\xb1\x89i\x05(\xc142\x11@\x01alltalk,awesome,bunnyhopping,escape,games,gfl,gl,gravity,increased_maxplayers,life,startmoney,ze,zm,zombie,zombie escape\x00\xf0\x00\x00\x00\x00\x00\x00\x00',
         {'hostname': '[GFLClan.com]24/7 ZOMBIE ESCAPE |Rank|NoBlock|FastDL|Chicago', 'map': 'ze_death_star_escape_v4_3', 'is_password': False, 'maxplayers': 64, 'players': 63},
     ),
     'DOTA 2': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11Valve Dota 2 Singapore Server (srcds144.153.29)\x00dota\x00dota\x00Dota 2\x00:\x02\t\x1f\x00dl\x00\x0140\x00\xf1\xa3i\x07$^\xe53\x11@\x01\x90m\x00empty\x00:\x02\x00\x00\x00\x00\x00\x00',
         {'hostname': 'Valve Dota 2 Singapore Server (srcds144.153.29)', 'map': 'dota', 'is_password': False, 'maxplayers': 31, 'players': 9},
     ),
     'Day of Defeat': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffm127.0.0.1:27011\x00\xe3\x80\x90\xe8\x93\x9d\xe6\xb5\xb7\xe6\x88\x98\xe9\x98\x9f01\xe3\x80\x91\xe6\xb7\xb7\xe6\x88\x98-\xe5\xa4\x9a\xe5\xbc\xb9\xe5\xa4\xb93\xe6\x89\x8b\xe9\x9b\xb7\x00dod_assault2\x00dod\x00www.dod168.com\xe5\xae\x98\xe7\xbd\x91\x00\x1d /dw\x00\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x00',
         {'hostname': '【蓝海战队01】混战-多弹夹3手雷', 'map': 'dod_assault2', 'is_password': False, 'maxplayers': 32, 'players': 29},
     ),
     'Day of Defeat: Source': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11     24/7 =(eGO)= AVALANCHE NO BOTS! | GameME\x00dod_avalanche\x00dod\x00Day of Defeat: Source\x00,\x01\x1e \x00dw\x00\x012230303\x00\xb1\x87i\x02\xb8\x03\xde.\x11@\x01fadetoblack,gameME\x00,\x01\x00\x00\x00\x00\x00\x00',
         {'hostname': '     24/7 =(eGO)= AVALANCHE NO BOTS! | GameME', 'map': 'dod_avalanche', 'is_password': False, 'maxplayers': 32, 'players': 30},
     ),
     'DayZ': (
-        'valve',
+        'source',
         b"\xff\xff\xff\xffI\x11Drunken Bastards - 24/7 Day - 2hr restart - Everybody Welcome\x00DayZ_Auto\x00dayz\x00DayZ\x00\x00\x00'(\x00dw\x00\x010.45.124426\x00\xb1\xfe\x08\x02xD\x144\x11@\x01battleye,15:24\x00\xac_\x03\x00\x00\x00\x00\x00",
         {'hostname': 'Drunken Bastards - 24/7 Day - 2hr restart - Everybody Welcome', 'map': 'DayZ_Auto', 'is_password': False, 'maxplayers': 40, 'players': 39},
     ),
@@ -121,17 +121,17 @@ server_data = {
         {'hostname': '=MXT=CTF Server', 'map': '[SEC2] - MXTTrollHouse', 'is_password': False, 'maxplayers': 18, 'players': 17},
     ),
     "Garry's Mod": (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11DarkRP Reloaded | [M9K|Custom|Cars|Jobs|Casino|Drugs]  UPDATED\x00rp_downtown_v4c_v2_drp_ext\x00garrysmod\x00DarkRP\x00\xa0\x0fCa\x00dw\x00\x0114.04.19\x00\xb1\x87i\t\xb0\xd8\x983\x11@\x01 gm:darkrp\x00\xa0\x0f\x00\x00\x00\x00\x00\x00',
         {'hostname': 'DarkRP Reloaded | [M9K|Custom|Cars|Jobs|Casino|Drugs]  UPDATED', 'map': 'rp_downtown_v4c_v2_drp_ext', 'is_password': False, 'maxplayers': 97, 'players': 67},
     ),
     'Half-Life 1': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffm127.0.0.1:27015\x00! !--Good_Half-Life_Server--! !\x00crossfire\x00valve\x00Half-Life\x00\x0b /dw\x00\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01',
         {'hostname': '! !--Good_Half-Life_Server--! !', 'map': 'crossfire', 'is_password': False, 'maxplayers': 32, 'players': 11},
     ),
     'Half-Life 2: Deathmatch': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11-=24/7 BATTLEGROUND *HARDCORE*=-\x00aoc_battleground\x00ageofchivalry\x00Age of Chivalry\x00fD\x12 \x00dl\x00\x011.0.0.6\x00\xb1\x87i\x00|\xe3\x04(\x11@\x01HLstatsX:CE,increased_maxplayers\x00fD\x00\x00\x00\x00\x00\x00',
         {'hostname': '-=24/7 BATTLEGROUND *HARDCORE*=-', 'map': 'aoc_battleground', 'is_password': False, 'maxplayers': 32, 'players': 18},
     ),
@@ -141,22 +141,22 @@ server_data = {
         {'hostname': '~  BLOODY GULCH - www.bloodygulch.info', 'map': 'bloodgulch', 'is_password': False, 'maxplayers': 16, 'players': 16},
     ),
     'Homefront': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x07!Crywars.de TDM\x00FL-LOWLANDS\x00homefront.1.5.500001\x00Homefront\x00<\xd7\x00 \x00dw\x00\x011.5.500001\x00\xb1\x88i\x05\x88uJ0\x11@\x01 s1 306 s2 1 s3 2 s4 1 s5 0 s10 3 s11 0 s12 0\x00<\xd7\x00\x00\x00\x00\x00\x00',
         {'hostname': '!Crywars.de TDM', 'map': 'FL-LOWLANDS', 'is_password': False, 'maxplayers': 32, 'players': 0},
     ),
     'Insurgency': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11http://xFLOWservers.COM PVP [GAMEME][LOSANGELES] 1\x00district\x00insurgency\x00Insurgency\x00\x00\x00\x1b \x00dl\x00\x011.2.1.9\x00\xb1\x87i\x08\xf0\r 1\x11@\x01firefight,mm:pvp,theater:default,mcl2445,nwibanlist,nospawnprotection,\x00\xa0f\x03\x00\x00\x00\x00\x00',
         {'hostname': 'http://xFLOWservers.COM PVP [GAMEME][LOSANGELES] 1', 'map': 'district', 'is_password': False, 'maxplayers': 32, 'players': 27},
     ),
     'Insurgency Standalone': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11-SD- Adversarial Fun House!\x00buhriz\x00insurgency\x00Insurgency\x00\x00\x00\x00 \x00dl\x00\x011.2.1.9\x00\xb1\x87i\x03x\xb0\x1c\x12\x11@\x01push,mm:pvp,theater:default,mcl2445,nwibanlist,empty,\x00\xa0f\x03\x00\x00\x00\x00\x00',
         {'hostname': '-SD- Adversarial Fun House!', 'map': 'buhriz', 'is_password': False, 'maxplayers': 32, 'players': 0},
     ),
     'Just Cause 2: Multiplayer': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11Hasbo\'s FREEROAM|FREE STORE|WARP|TP\x00Players: 11/5000\x00jc2mp\x00Just Cause 2: Multiplayer Mod\x00\x00\x00\x00\x01\x00dl\x00\x001.0.0.0\x00\x91a\x1e\x03x\x9f\xc9"\x11@\x01\x08\xf4\x03\x00\x00\x00\x00\x00',
         {'hostname': "Hasbo's FREEROAM|FREE STORE|WARP|TP", 'map': 'Unknown', 'is_password': False, 'maxplayers': 5000, 'players': 11},
     ),
@@ -166,12 +166,12 @@ server_data = {
         {'hostname': 'ZOMBIEMANIYA#2|V.1058|TOTALLINE|0-255lvl', 'map': 'KF-LOTD-TheaterZM', 'is_password': False, 'maxplayers': 50, 'players': 12},
     ),
     'Left 4 Dead': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x07COOP`16 Paradis [l4dZone.ru]\x00l4d_airport01_greenhouse\x00left4dead\x00L4D - Co-op - Normal\x00\xf4\x01\x00\x10\x00dl\x00\x001.0.2.9\x00\xa0bjempty,no-steam\x00',
         {'hostname': 'COOP`16 Paradis [l4dZone.ru]', 'map': 'l4d_airport01_greenhouse', 'is_password': False, 'maxplayers': 16, 'players': 0},
     ),
     'Left 4 Dead 2': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11ZambiLand 13vs13 [2.1.2.5]\x00c5m1_waterfront\x00left4dead2\x00Left 4 Dead 2\x00&\x02\x14\x1b\x00dl\x00\x012.1.2.5\x00\xb1\x87i\x07H\x1b\x053\x11@\x01versus,increased_maxplayers,loot,no-steam,rank,secure\x00&\x02\x00\x00\x00\x00\x00\x00',
         {'hostname': 'ZambiLand 13vs13 [2.1.2.5]', 'map': 'c5m1_waterfront', 'is_password': False, 'maxplayers': 27, 'players': 20},
     ),
@@ -191,7 +191,7 @@ server_data = {
         {'hostname': '§f§k.:§b§lGC§9§l2§f§k:. §9§l:§f§lSKYBLOCK§b§l :§9§l:§b§l: §f§lFRAKCJE§9§l:§l           §c§lPobierz MC 1.7.4 tutaj: §a§lwww.gc2.pl                        §f§l[§a§l1§f.§a§l7§f.§a§lX§f§l]', 'map': 'BungeeCord_Proxy', 'is_password': False, 'maxplayers': 2000, 'players': 23},
     ),
     'Natural Selection 2': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11Combat MOD+ IBISGaming.com (LagFREE)\x00ns2_co_pulse\x00naturalselection2\x00Natural Selection 2\x008\x13\x15\x17\x00lw\x00\x011.0.0.0\x00\xb1\x87i\x00tM\xa13\x11@\x01266|combat|M|143|rookie|R_S1|shine|P_S0\x008\x13\x00\x00\x00\x00\x00\x00',
         {'hostname': 'Combat MOD+ IBISGaming.com (LagFREE)', 'map': 'ns2_co_pulse', 'is_password': False, 'maxplayers': 23, 'players': 21},
     ),
@@ -206,12 +206,12 @@ server_data = {
         {'hostname': '    [REDORCHESTRA.RU] Russian Community Server by [GMNET.RU]', 'map': 'RO-Roadblock_X5', 'is_password': False, 'maxplayers': 50, 'players': 20},
     ),
     'Red Orchestra 2': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11[2.FJg] HOS - Tactical Realism\x00TE-Bridges_of_Druzhina_MCP\x00ro2\x00Red Orchestra 2\x00z\x8aF@\x00lw\x00\x012.0.0.15\x00\xb1a\x1e\x03\xe0:")\x11@\x01a:64,s:2,b:1,e:1,m:0,h:1,c:0,d:0,n:0,o:0,i:1,g:0,k:100,j:0,t:100,r:0,u:0,f:0,l:,p:0,q:,\x00z\x8a\x00\x00\x00\x00\x00\x00',
         {'hostname': '[2.FJg] HOS - Tactical Realism', 'map': 'TE-Bridges_of_Druzhina_MCP', 'is_password': False, 'maxplayers': 64, 'players': 70},
     ),
     'Rust': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x116-21 | BATTLEFIELD | NOLAG | KEVLAR/M4 | TP\x00rust_island_2013\x00rust\x00Rust Server\x00\x00\x00Sd\x00lw\x00\x011069\x00\xb1\x84m\x07T\xef\xc63\x11@\x01rust,modded,oxide,cp83,mp100,v1069\x00J\xda\x03\x00\x00\x00\x00\x00',
         {'hostname': '6-21 | BATTLEFIELD | NOLAG | KEVLAR/M4 | TP', 'map': 'rust_island_2013', 'is_password': False, 'maxplayers': 100, 'players': 83},
     ),
@@ -221,7 +221,7 @@ server_data = {
         {'hostname': '[C=FFFF00]HOUSE OF P', 'map': 'A-Bomb Nightclub', 'is_password': False, 'maxplayers': 10, 'players': 9},
     ),
     'Sniper Elite V2': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11X-Seven\x00ARMS RACE\x00sniperelitev2\x00SEV2 dedicated server\x00\x94\xf7\x0b\x0c\x00dw\x00\x011.1.1.1\x00\xb1\xa8i\x03|\xd842\x11@\x01_1357_6_0_0_-1936053789_1______________________________________140003050000000003000000a30d0000a30d0000a30d0000a30d00005f420145\x00\x94\xf7\x00\x00\x00\x00\x00\x00',
         {'hostname': 'X-Seven', 'map': 'ARMS RACE', 'is_password': False, 'maxplayers': 12, 'players': 11},
     ),
@@ -241,17 +241,17 @@ server_data = {
         {'hostname': '       ^1AOD ^0Pandemonium', 'map': 'mb2_dotf', 'is_password': False, 'maxplayers': 32, 'players': 12},
     ),
     'Starbound': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x07Roleplay Server Antares\x00Alpha Malkut 8527 I,Alpha Lyncis Minoris IV a,Beta Oswin 5395 VI a,     Yggdrasil Root     ,Gamma Marsin Minoris II,Gamma Arrakis Majoris III\x00starbound\x00Starbound\x00\xfe\xff\x1cF\x00DL\x00\x00Beta v. Enraged Koala - Update 8\x00\x80\x00\x00',
         {'hostname': 'Roleplay Server Antares', 'map': 'Alpha Malkut 8527 I,Alpha Lyncis Minoris IV a,Beta Oswin 5395 VI a,     Yggdrasil Root     ,Gamma Marsin Minoris II,Gamma Arrakis Majoris III', 'is_password': False, 'maxplayers': 70, 'players': 28},
     ),
     'Team Fortress 2': (
-        'valve',
+        'source',
         b"\xff\xff\xff\xffI\x11LazyPurple's Silly Server #1\x00delfinoplaza_final\x00tf\x00Team Fortress\x00\xb8\x01\x1e\x1e\x00dw\x00\x012292213\x00\xb1\x87i\x08\x88\xf3\xc80\x11@\x01alltalk,increased_maxplayers,lazypurple,nocrits,replays,respawntimes\x00\xb8\x01\x00\x00\x00\x00\x00\x00",
         {'hostname': "LazyPurple's Silly Server #1", 'map': 'delfinoplaza_final', 'is_password': False, 'maxplayers': 30, 'players': 30},
     ),
     'Team Fortress Classic': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffm127.0.0.1:27015\x00-[EVIL]- Battlezone-X |back to the basics|\x00casbah\x00tfc\x00NeoTF\x00\x16 /dw\x00\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x01\x01',
         {'hostname': '-[EVIL]- Battlezone-X |back to the basics|', 'map': 'casbah', 'is_password': False, 'maxplayers': 32, 'players': 22},
     ),
@@ -281,14 +281,14 @@ server_data = {
         {'hostname': '^1F^7|^1A ^7RECRUITING ^1XP SAVE', 'map': 'trmfght_beta2', 'is_password': False, 'maxplayers': 51, 'players': 29},
     ),
     'Zombie Panic Source': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11LoS-Gaming :: 24/7 Cabin :: LoS-Clan.net \x00zpo_cabin_outbreak_b6\x00zps\x00ZPS 2.4.1i+\x00\\D\x10\x18\x00dw\x00\x012.4.1.0\x00\xb1\x87i\x08\x1c\xec\xcd3\x11@\x01gameME,increased_maxplayers\x00\\D\x00\x00\x00\x00\x00\x00',
         {'hostname': 'LoS-Gaming :: 24/7 Cabin :: LoS-Clan.net ', 'map': 'zpo_cabin_outbreak_b6', 'is_password': False, 'players': 16, 'maxplayers': 24},
     ),
 
     # this game are not in gametracker.com
     'Blade Symphony': (
-        'valve',
+        'source',
         b'\xff\xff\xff\xffI\x11Server name\x00duel_district\x00berimbau\x00Blade Symphony\x00\x00\x00\x00\n\x00dl\x00\x010.01.02777\x00\xb1\x90i\t`\x9f\x0fl\x11@\x01mode:Blade Symphony,empty,gamemode:Duel,ranked:yes,sv_search_key_1000,\x00@q\x03\x00\x00\x00\x00\x00',
         {'hostname': 'Server name', 'map': 'duel_district', 'is_password': False, 'players': 0, 'maxplayers': 10},
     ),
@@ -296,7 +296,7 @@ server_data = {
 
 # x = Query()
 # x.debug = True
-# print(x.query('80.72.40.110', 27024, 'valve'))
+# print(x.query('80.72.40.110', 27024, 'source'))
 
 
 class ServerQuery(Thread):
@@ -331,6 +331,7 @@ class ServerQuery(Thread):
                     s.sendto(response_bytes, addr)
 
 
+import query
 class TestQuery(TestCase):
     def setUp(self):
         self.port = 27601

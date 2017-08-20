@@ -1,10 +1,11 @@
 import sys
 
-if sys.version_info < (3, 4):
-    raise RuntimeError('You need Python 3.4+ for this module.')
+if sys.version_info < (3, 5):
+    raise RuntimeError('You need Python 3.5+ for this module.')
 
-from query.query import Query
+from .protocols import *  # noqa
 
-__all__ = [
-    'Query'
-]
+
+__all__ = (
+    protocols.__all__  # noqa
+)
